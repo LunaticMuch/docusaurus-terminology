@@ -2,26 +2,30 @@
   "name": "@lunaticmuch/docusaurus-dictionary",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@mui/material": "^5.10.8",
     "git-diff": "^2.0.6",
-    "globby": "^13.1.2",
-    "parse-md": "^3.0.3"
+    "globby": "^11.1.0",
+    "parse-md": "^2.0.5"
   },
   "devDependencies": {
-    "@babel/core": "^7.19.3",
-    "@babel/preset-env": "^7.19.3",
-    "babel-jest": "^29.1.2",
     "eslint": "^8.24.0",
     "eslint-config-prettier": "^8.5.0",
     "jest": "^29.1.2",
-    "prettier": "^2.7.1",
-    "regenerator-runtime": "^0.13.9"
+    "prettier": "^2.7.1"
+  },
+  "peerDependencies": {
+    "react": "^16.8.4 || ^17.0.2",
+    "react-dom": "^16.8.4 || ^17.0.2"
   }
 }

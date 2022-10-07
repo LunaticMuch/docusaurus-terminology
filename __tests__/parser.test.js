@@ -1,6 +1,3 @@
-//import 'regenerator-runtime/runtime';
-
-const path = require('path');
 const {
   addJSImportStatement,
   getRelativePath,
@@ -30,7 +27,7 @@ describe('add import statement', () => {
     var newContent = addJSImportStatement(content);
     it('gets the updated content with the import statement', () => {
       expect(newContent).toBe(
-        '\n\nimport Term from "@docusaurus-terminology/term";\n' + content);
+        '\n\nimport Term from "@lunaticmuch/docusaurus-dictionary/components/tooltip.js";\n' + content);
     });
 });
 
@@ -39,7 +36,7 @@ describe('add import statement in empty file', () => {
     var newContent = addJSImportStatement(content);
     it('gets the updated content with the import statement', () => {
       expect(newContent).toBe(content
-        + '\n\nimport Term from "@docusaurus-terminology/term";\n');
+        + '\n\nimport Term from "@lunaticmuch/docusaurus-dictionary/components/tooltip.js";\n');
     });
 });
 
@@ -64,15 +61,15 @@ describe('get the term name and reference (without the file extension)', () => {
 
 // async functions
 it('get list of files to parse', async () => {
-  const basePath = './packages/parser/__tests__/test_docs/';
-  const excludeList = ['./packages/parser/__tests__/test_docs/exclude.md'];
+  const basePath = './__tests__/test_docs/';
+  const excludeList = ['./__tests__/test_docs/exclude.md'];
   const files = await getFiles(basePath, excludeList);
   expect(files.length).toEqual(2);
 });
 
 
 it('get list of terms', async () => {
-  const basePath = './packages/parser/__tests__/test_docs/';
+  const basePath = './__tests__/test_docs/';
   const files = await getFiles(basePath, []);
   const terms = await preloadTerms(files);
   expect(terms.length).toEqual(2);
@@ -80,7 +77,7 @@ it('get list of terms', async () => {
 
 
 it('filter the terms based on the type: concept', async () => {
-  const basePath = './packages/parser/__tests__/test_docs/';
+  const basePath = './__tests__/test_docs/';
   const files = await getFiles(basePath, []);
   const terms = await preloadTerms(files);
   const glossaryTermPatterns = ['concept'];

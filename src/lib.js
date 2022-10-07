@@ -1,7 +1,7 @@
 const path = require("path");
 const fs = require("fs");
 const parseMD = require("parse-md").default;
-import {globby} from 'globby';
+const globby = require("globby")
 
 const glossaryHeader = `---
 id: glossary
@@ -74,13 +74,9 @@ function getCleanTokens(match, separator) {
   // remove file extension, if present
   tokens[1] = tokens[1].replace(/\.[^/.]+$/, "");
   tokens.forEach((token, index) => {
-    tokens[index] = token.replace(/[\%]/g, "");
+    tokens[index] = token.replace(/[%]/g, "");
   });
   return tokens;
-}
-
-function splice(cont, idx, rem, str) {
-    return cont.slice(0, idx) + str + cont.slice(idx + Math.abs(rem));
 }
 
 function getHeaders(content) {
@@ -91,7 +87,7 @@ function getHeaders(content) {
 
 function addJSImportStatement(content) {
   const importStatement = `\n\nimport Term ` +
-  `from "@docusaurus-terminology/term";\n`;
+  `from "@lunaticmuch/docusaurus-dictionary/components/tooltip.js";\n`;
   return importStatement + content;
 }
 
@@ -151,7 +147,7 @@ function getOrCreateGlossaryFile(path) {
   } else {
     // keep only the header of file
     // TODO: Replace with async fs function
-    const content = fs.readFileSync(path, "utf8", (err, data) => {
+    const content = fs.readFileSync(path, "utf8", (err) => {
       console.log(err);
     });
     const index = content.indexOf("---", 1) + "---".length;
@@ -160,9 +156,8 @@ function getOrCreateGlossaryFile(path) {
   return fileContent;
 }
 
-function getRelativePath(source, target, opts) {
+function getRelativePath(_, target, opts) {
   // calculate relative path from each file's parent dir
-  const sourceDir = source.substr(0, source.lastIndexOf("/"));
   const targetDir = target.substr(0, target.lastIndexOf("/"));
   //const relative_url = path.relative(sourceDir, targetDir);
   const relative_url = path.relative(opts.termsDir, targetDir);
