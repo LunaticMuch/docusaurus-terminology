@@ -1,15 +1,18 @@
 {
-  "name": "@lunaticmuch/docusaurus-dictionary",
+  "name": "@lunaticmuch/docusaurus-terminology",
   "version": "1.0.0",
-  "description": "",
+  "description": "A terminology / dictionary add-on for Docusaurus",
   "main": "src/index.js",
   "scripts": {
     "test": "jest",
-    "lint": "eslint"
+    "lint": "eslint src/**/*.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": {
+    "name": "Stefano Cislaghi",
+    "email": "s.cislaghi@gmail.com",
+    "url": "https://stefanocislaghi.com/"
+  },
+  "license": "BSD-2-CLAUSE",
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
@@ -27,5 +30,22 @@
   "peerDependencies": {
     "react": "^16.8.4 || ^17.0.2",
     "react-dom": "^16.8.4 || ^17.0.2"
+  },
+  "keywords": [
+    "docusaurus",
+    "terminology",
+    "dictionary",
+    "documentation",
+    "plugin",
+    "markdown",
+    "data dictionary"
+  ],
+  "engines": {
+    "node": ">=16.14",
+    "npm": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LunaticMuch/docusaurus-terminology.git"
   }
 }

@@ -27,7 +27,7 @@ describe('add import statement', () => {
     var newContent = addJSImportStatement(content);
     it('gets the updated content with the import statement', () => {
       expect(newContent).toBe(
-        '\n\nimport Term from "@lunaticmuch/docusaurus-dictionary/components/tooltip.js";\n' + content);
+        '\n\nimport Term from "@lunaticmuch/docusaurus-terminology/components/tooltip.js";\n' + content);
     });
 });
 
@@ -36,7 +36,7 @@ describe('add import statement in empty file', () => {
     var newContent = addJSImportStatement(content);
     it('gets the updated content with the import statement', () => {
       expect(newContent).toBe(content
-        + '\n\nimport Term from "@lunaticmuch/docusaurus-dictionary/components/tooltip.js";\n');
+        + '\n\nimport Term from "@lunaticmuch/docusaurus-terminology/components/tooltip.js";\n');
     });
 });
 

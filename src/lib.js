@@ -87,7 +87,7 @@ function getHeaders(content) {
 
 function addJSImportStatement(content) {
   const importStatement = `\n\nimport Term ` +
-  `from "@lunaticmuch/docusaurus-dictionary/components/tooltip.js";\n`;
+  `from "@lunaticmuch/docusaurus-terminology/components/tooltip.js";\n`;
   return importStatement + content;
 }
 
