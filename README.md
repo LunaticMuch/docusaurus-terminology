@@ -31,7 +31,7 @@ The same default environment used by docusaurus satisfies the plugin requirement
 To install the plugin to your Docusaurus repository, use the command:
 
 ```commandline
-yarn add @docusaurus-terminology/parser @docusaurus-terminology/term
+npm install @lunaticmuch/docusaurus-terminology
 ```
 
 Then, you can add the plugin to `docusaurus.config.js` file of your repository:
