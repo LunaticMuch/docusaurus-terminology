@@ -12,7 +12,10 @@ Array.prototype.diff = function(a) {
     return this.filter(function(i) {return a.indexOf(i) < 0;});
 };
 
-async function getFiles(basePath, noParseFiles, noThrow=false) {
+async function getFiles(basePath, noParseFiles, noThrow = false) {
+  // fixes paths on Windows environments, globby requires forward slashes
+  const fixedPath = basePath.replaceAll('\\', '/');
+
   // Added the noThrow optional param
   // in case there is a call to this
   // function that does not want to
@@ -21,7 +24,7 @@ async function getFiles(basePath, noParseFiles, noThrow=false) {
   // get all files under dir
   try {
     // get all md files from basePath
-    files = await globby(basePath+"**/*.{md,mdx}");
+    files = await globby(fixedPath+"**/*.{md,mdx}");
   } catch (err) {
     if (noThrow) {
       // handle error here
