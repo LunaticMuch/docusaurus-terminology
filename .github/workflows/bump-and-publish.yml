@@ -7,7 +7,7 @@ on:
 
 jobs:
   bump-version:
-    name: Bump
+    name: Bump package version
     runs-on: ubuntu-latest
 
     steps:
@@ -34,9 +34,9 @@ jobs:
         run: echo "new tag $NEW_TAG"
 
   publish-npm:
-    name: Publish
+    name: Publish to NPM Registry
     runs-on: ubuntu-latest
-    needs: Bump
+    needs: bump-version
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
