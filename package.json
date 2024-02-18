@@ -3,7 +3,6 @@
   "version": "1.2.3",
   "description": "A terminology / dictionary add-on for Docusaurus",
   "main": "src/index.js",
-  "type": "module",
   "scripts": {
     "test": "jest",
     "lint": "eslint src/**/*.js"
@@ -19,8 +18,8 @@
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.15.10",
     "git-diff": "^2.0.6",
-    "globby": "^14.0.1",
-    "parse-md": "^3.0.3"
+    "globby": "^11.1.0",
+    "parse-md": "^2.0.5"
   },
   "devDependencies": {
     "eslint": "^8.56.0",
