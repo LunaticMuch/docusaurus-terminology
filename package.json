@@ -3,6 +3,7 @@
   "version": "1.2.2",
   "description": "A terminology / dictionary add-on for Docusaurus",
   "main": "src/index.js",
+  "type":"module",
   "scripts": {
     "test": "jest",
     "lint": "eslint src/**/*.js"
@@ -28,8 +29,8 @@
     "prettier": "^3.2.5"
   },
   "peerDependencies": {
-    "react": "^16.8.4 || ^17.0.2",
-    "react-dom": "^16.8.4 || ^17.0.2"
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
   },
   "keywords": [
     "docusaurus",
@@ -41,7 +42,7 @@
     "data dictionary"
   ],
   "engines": {
-    "node": ">=16.14",
+    "node": ">=20.0.0",
     "npm": ">=8.0.0"
   },
   "repository": {
