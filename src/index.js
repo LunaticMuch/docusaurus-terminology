@@ -24,7 +24,10 @@ module.exports = function (context, opts) {
       `using default directory "${DEFAULT_OPTIONS.termsDir}"\n`);
   options = Object.assign({}, DEFAULT_OPTIONS, opts);
   validateOptions(options);
-  options.termsUrl = path.join(context.baseUrl, opts.termsUrl, "/");
+  // console.log('Test', path.join(context.baseUrl, opts.termsUrl, "/"))
+  console.log('After test', opts)
+
+  options.termsUrl = path.join(context.baseUrl, "/docs/terms", "/");
   options.termsDir = path.resolve(options.termsDir) + "/";
   options.docsDir = path.resolve(options.docsDir) + "/";
   options.glossaryFilepath = path.resolve(options.glossaryFilepath);
