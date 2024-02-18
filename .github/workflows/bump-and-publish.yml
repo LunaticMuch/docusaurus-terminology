@@ -15,6 +15,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ github.ref }}
+          persist-credentials: false
           token: ${{ secrets.ACTION_GITHUB_TOKEN_SC }}
       - name: "cat package.json"
         run: cat ./package.json
