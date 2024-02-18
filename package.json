@@ -1,6 +1,6 @@
 {
   "name": "@lunaticmuch/docusaurus-terminology",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "A terminology / dictionary add-on for Docusaurus",
   "main": "src/index.js",
   "scripts": {
