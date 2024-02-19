@@ -30,7 +30,7 @@ jobs:
     push:
       branches:
         - main
-  
+
   permissions:
     contents: read # for checkout
   
