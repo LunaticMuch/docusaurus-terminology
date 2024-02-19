@@ -1,36 +1,36 @@
 jobs:
-    release:
-      name: Release
-      permissions:
-        contents: write
-        id-token: write
-        issues: write
-        pull-requests: write
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v3
-          with:
-            fetch-depth: 0
-        - name: Setup Node.js
-          uses: actions/setup-node@v3
-          with:
-            node-version: 20.10.0
-        - name: Install dependencies
-          run: npm clean-install
-        - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
-          run: npm audit signatures
-        - env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          name: Release
-          run: npx semantic-release
-  name: Release
-  on:
-    push:
-      branches:
-        - main
+  release:
+    name: Release
+    permissions:
+      contents: write
+      id-token: write
+      issues: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: lts/hydrogen
+      - name: Install dependencies
+        run: npm clean-install
+      - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
+        run: npm audit signatures
+      - env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        name: Release
+        run: npx semantic-release
+name: Release
+on:
+  push:
+    branches:
+      - main
+      - beta
 
-  permissions:
-    contents: read # for checkout
-  
+permissions:
+  contents: read # for checkout
