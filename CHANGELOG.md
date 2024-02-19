@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/LunaticMuch/docusaurus-terminology/compare/v1.3.0...v1.3.1) (2024-02-19)
+
+
+### Bug Fixes
+
+* terms url ([10facbf](https://github.com/LunaticMuch/docusaurus-terminology/commit/10facbf49599f102ec002fdfab0d601ece042500))
+
 # [1.3.0](https://github.com/LunaticMuch/docusaurus-terminology/compare/v1.2.4...v1.3.0) (2024-02-19)
 
 
