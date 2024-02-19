@@ -1,4 +1,3 @@
-
 jobs:
     release:
       name: Release
