@@ -1,15 +1,35 @@
-const path = require("path");
-const fs = require("fs");
-const parseMD = require("parse-md").default;
-const globby = require("globby")
+import path from 'path';
+import fs from 'node:fs'
+import parseMD from 'parse-md'
+import { globby } from 'globby';
 
 const glossaryHeader = `---
 id: glossary
 title: Glossary
 ---`;
 
-Array.prototype.diff = function(a) {
-    return this.filter(function(i) {return a.indexOf(i) < 0;});
+interface IFrontmatterGlossary {
+  id: string,
+  title: string
+  hoverText: string,
+  glossaryText: string,
+  type: string
+}
+
+interface IParsedMd {
+  metadata: IFrontmatterGlossary;
+  content: string;
+}
+
+declare global {
+  interface Array<T> {
+    diff(elem: T): Array<T>;
+  }
+}
+
+
+Array.prototype.diff = function (a) {
+  return this.filter(function (i) { return a.indexOf(i) < 0; });
 };
 
 async function getFiles(basePath, noParseFiles, noThrow = false) {
@@ -24,7 +44,7 @@ async function getFiles(basePath, noParseFiles, noThrow = false) {
   // get all files under dir
   try {
     // get all md files from basePath
-    files = await globby(fixedPath+"**/*.{md,mdx}");
+    files = await globby(fixedPath + "**/*.{md,mdx}");
   } catch (err) {
     if (noThrow) {
       // handle error here
@@ -44,11 +64,11 @@ async function preloadTerms(termsFiles) {
       fileContent = await fs.promises.readFile(term, "utf8");
     } catch (err) {
       (err.code === 'ENOENT') ?
-      console.log(`File ${term} not found.`) :
-      console.log(`${err}\nExiting...`);
+        console.log(`File ${term} not found.`) :
+        console.log(`${err}\nExiting...`);
       process.exit(1);
     }
-    let { metadata } = parseMD(fileContent);
+    let { metadata } = parseMD(fileContent) as IParsedMd;
     if (!metadata.id) {
       console.log(`! The term "${term}" lacks the attribute "id" and so is ` +
         `excluded from the term parsing functionality.`);
@@ -59,7 +79,7 @@ async function preloadTerms(termsFiles) {
       }
       const data = {
         content: fileContent,
-        filepath:  term,
+        filepath: term,
         hoverText: metadata.hoverText || "",
         glossaryText: metadata.glossaryText || "",
         type: metadata.type || "",
@@ -90,17 +110,17 @@ function getHeaders(content) {
 
 function addJSImportStatement(content) {
   const importStatement = `\n\nimport Term ` +
-  `from "@lunaticmuch/docusaurus-terminology/components/tooltip.js";\n`;
+    `from "@lunaticmuch/docusaurus-terminology/components/tooltip.js";\n`;
   return importStatement + content;
 }
 
 function sortFiles(files) {
   files.sort((a, b) =>
     a.title.toLowerCase() > b.title.toLowerCase()
-    ? 1
-    : b.title.toLowerCase() > a.title.toLowerCase()
-    ? -1
-    : 0
+      ? 1
+      : b.title.toLowerCase() > a.title.toLowerCase()
+        ? -1
+        : 0
   );
 }
 
@@ -130,7 +150,7 @@ function filterTypeTerms(terms, glossaryTermPatterns) {
 
 function getGlossaryTerm(term, path) {
   let hover = term.glossaryText != undefined ? term.glossaryText : "";
-  if(hover.length <= 0) {
+  if (hover.length <= 0) {
     hover = term.hoverText != undefined ? term.hoverText : "";
   }
   return hover.length > 0 ?
@@ -141,20 +161,26 @@ function getGlossaryTerm(term, path) {
 function getOrCreateGlossaryFile(path) {
   let fileContent = "";
   // TODO: Replace with async fs function
-  if(!fs.existsSync(path)) {
+  if (!fs.existsSync(path)) {
     console.log(`! Glossary file does not exist in path: "${path}". Creating...`);
     fileContent = glossaryHeader;
     // TODO: Replace with async fs function
-    fs.writeFileSync(path, fileContent, "utf8",
-      (error) => { if (error) throw error; });
-  } else {
-    // keep only the header of file
-    // TODO: Replace with async fs function
-    const content = fs.readFileSync(path, "utf8", (err) => {
+    // fs.writeFileSync(path, fileContent, "utf8",
+    //   (error: any) => { if (error) throw error; });
+    try {
+      const content = fs.writeFileSync(path, fileContent, "utf8")
+    } catch (err) {
       console.log(err);
-    });
-    const index = content.indexOf("---", 1) + "---".length;
-    fileContent = content.slice(0,index);
+    }
+  } else {
+    // TODO: Replace with async fs function
+    try {
+      const content = fs.readFileSync(path, { encoding: "utf8" });
+      const index = content.indexOf("---", 1) + "---".length;
+      fileContent = content.slice(0, index);
+    } catch (err) {
+      console.log(err);
+    }
   }
   return fileContent;
 }
