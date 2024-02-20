@@ -1,0 +1,30 @@
+{
+	"compilerOptions": {
+		"allowSyntheticDefaultImports": true,
+		"declaration": true,
+		"declarationMap": true,
+		"esModuleInterop": true,
+		"module": "nodenext",
+		"moduleResolution": "nodenext",
+		"noImplicitAny": false,
+		"outDir": "lib",
+		"skipLibCheck": true,
+		"sourceMap": true,
+		"strict": false,
+		"strictNullChecks": false,
+		"target": "ES2022"
+	},
+	"exclude": [
+		"node_modules",
+		"lib",
+		"dist",
+		"example",
+		"schema"
+	],
+	"include": [
+		"src"
+	],
+	"ts-node": {
+		"esm": true
+	}
+}

@@ -1,8 +1,20 @@
-const path = require("path");
+import path from "path";
 
-const parser = require("./commands/parser.js");
-const glossary = require("./commands/glossary.js");
-const validateOptions = require("./validator.js");
+import { parser } from "./commands/parser.js";
+import { glossary } from "./commands/glossary.js";
+import { validateOptions } from "./validator.js";
+
+interface IOptions {
+  termsUrl: string,
+  termsDir: string,
+  docsDir: string,
+  glossaryFilepath: string,
+  noParseFiles: string[],
+  noGlossaryFiles:  string[],
+  glossaryTermPatterns: string[],
+  dryRun: boolean,
+  debug: boolean
+}
 
 const DEFAULT_OPTIONS = {
   docsDir: "./docs/",
@@ -18,13 +30,12 @@ const DEFAULT_OPTIONS = {
 };
 
 module.exports = function (context, opts) {
-  // initialize options
-  let options = {};
+
   !opts.termsDir && console.log(`\n! No option for terms directory found, ` +
       `using default directory "${DEFAULT_OPTIONS.termsDir}"\n`);
-  options = Object.assign({}, DEFAULT_OPTIONS, opts);
+  const options = Object.assign({}, DEFAULT_OPTIONS, opts);
   validateOptions(options);
-  options.termsUrl = path.join(context.baseUrl, opts.termsUrl, "/");
+  options.termsUrl = path.join(context.baseUrl, options.termsUrl, "/");
   options.termsDir = path.resolve(options.termsDir) + "/";
   options.docsDir = path.resolve(options.docsDir) + "/";
   options.glossaryFilepath = path.resolve(options.glossaryFilepath);
