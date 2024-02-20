@@ -1,6 +1,7 @@
-const fs = require("fs");
-const path = require("path");
-const gitDiff = require("git-diff")
+import fs from 'node:fs'
+import path from 'path'
+import { gitDiff } from 'git-diff'
+
 const {
   getFiles,
   getCleanTokens,
@@ -10,7 +11,7 @@ const {
   addJSImportStatement
 } = require("../lib.js");
 
-async function parser(options) {
+export async function parser(options) {
   options.dryRun && console.log("\n* Dry run enabled *\n");
 
   // Load the term files
@@ -47,13 +48,13 @@ async function parser(options) {
   if (fs.lstatSync(options.docsDir).isFile() &&
     path.extname(options.docsDir).includes(".md")) {
     console.log(`! A single file to be parsed is given in option "docsDir":` +
-    ` "${options.docsDir}"`);
+      ` "${options.docsDir}"`);
     allFiles = [options.docsDir];
   }
 
   if (!allFiles.length) {
     console.log(`\u26A0 No files found. Might be wrong path` +
-    ` "${options.docsDir}" in option "docsDir" or empty folder`);
+      ` "${options.docsDir}" in option "docsDir" or empty folder`);
     // process.exit(1);
   }
 
@@ -82,18 +83,18 @@ async function parser(options) {
     // get all regex matches
     const regex_matches = content.match(regex);
     // iterate only pages with regex matches
-    if(regex_matches !== null) {
+    if (regex_matches !== null) {
       nmbMatches += regex_matches.length;
-      for(match of regex_matches) {
+      for (var match of regex_matches) {
         const tokens = getCleanTokens(match, options.patternSeparator);
         // for ease of use
         const text = tokens[0];
         const ref = tokens[1];
         const termReference = termsData.find(item => item.id === ref);
-        if(!termReference) {
+        if (!termReference) {
           console.log(`\nParsing file "${filepath}"...`);
           console.log(`\u26A0  Could not find the correct term from id ` +
-          `"${ref}" in regex match "${match}". Maybe typo or missing term file?`);
+            `"${ref}" in regex match "${match}". Maybe typo or missing term file?`);
           console.log("Exiting...");
           process.exit(1);
         }
@@ -113,8 +114,8 @@ async function parser(options) {
       // now the new content can be replaced
       // in the opened file
       // check: dry-run
-      if(options.dryRun) {
-        var diff = gitDiff(oldContent, content, {color: true});
+      if (options.dryRun) {
+        var diff = gitDiff(oldContent, content, { color: true });
         console.log(`\n! These changes will not be applied in the file ` +
           `${filepath}\nShowing the output below:\n\n${diff}\n\n`);
       } else {
@@ -133,4 +134,3 @@ async function parser(options) {
   console.log(`\u2713 ${nmbMatches} term replacements completed.`);
 }
 
-module.exports = parser;

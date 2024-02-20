@@ -1,6 +1,7 @@
-const fs = require("fs");
-const parser = require("./parser.js");
-const path = require("path");
+import fs from 'node:fs'
+import path from 'path'
+import { parser } from './parser.js'
+
 const {
   getFiles,
   preloadTerms,
@@ -13,7 +14,7 @@ const {
   getOrCreateGlossaryFile
 } = require("../lib.js");
 
-async function glossary(options) {
+export async function glossary(options) {
   options.dryRun && console.log("\n* Dry run enabled *\n");
 
   let glossaryContent = "";
@@ -53,7 +54,7 @@ async function glossary(options) {
   for (const term of termsByType) {
     const current_file_path = path.resolve(process.cwd(), options.glossaryFilepath);
     const relativePath = getRelativePath(current_file_path, term.filepath, options);
-    const glossaryTerm = getGlossaryTerm(term, relativePath);
+    const glossaryTerm = getGlossaryTerm(term, relativePath) as string;
     glossaryContent = glossaryContent + glossaryTerm;
   }
 
@@ -72,7 +73,7 @@ async function glossary(options) {
     } finally {
       console.log(`\u00BB Parsing terms in the glossary`);
       options.docsDir = options.glossaryFilepath;
-      glossaryContent = await parser(options);
+      await parser(options);
       console.log(`\u00BB Glossary is updated.`);
     }
   }
