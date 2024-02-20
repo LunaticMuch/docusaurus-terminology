@@ -1,3 +1,10 @@
+# [1.4.0-beta.1](https://github.com/LunaticMuch/docusaurus-terminology/compare/v1.3.0...v1.4.0-beta.1) (2024-02-20)
+
+
+### Features
+
+* typescript is better ([ddc0680](https://github.com/LunaticMuch/docusaurus-terminology/commit/ddc0680085295d9fcc3c262aba363144ad30f95b))
+
 # [1.3.0](https://github.com/LunaticMuch/docusaurus-terminology/compare/v1.2.4...v1.3.0) (2024-02-19)
 
 
