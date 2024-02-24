@@ -10,7 +10,8 @@
     "clean": "rimraf ./lib",
     "test": "jest",
     "lint": "eslint src/**/*.ts",
-    "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write"
+    "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write",
+    "prepack": "npm run build"
   },
   "author": {
     "name": "Stefano Cislaghi",
