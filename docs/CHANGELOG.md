@@ -1,3 +1,18 @@
+# [1.4.0](https://github.com/LunaticMuch/docusaurus-terminology/compare/v1.3.1...v1.4.0) (2024-02-24)
+
+
+### Bug Fixes
+
+* package step ([4e6c13e](https://github.com/LunaticMuch/docusaurus-terminology/commit/4e6c13e9026279d727997026d3986f3ba0cfce3d))
+* release model ([033ad3f](https://github.com/LunaticMuch/docusaurus-terminology/commit/033ad3f1166b41709bbe9b3064441d169179a5f7))
+
+
+### Features
+
+* strongly typed ([10bbc8d](https://github.com/LunaticMuch/docusaurus-terminology/commit/10bbc8d39fc9cad273226c59987affd8d7295ddc))
+* typescript again ([5483d28](https://github.com/LunaticMuch/docusaurus-terminology/commit/5483d28773f4d9512657839ccb10d413ec98baf2))
+* typescript is better ([92f04f3](https://github.com/LunaticMuch/docusaurus-terminology/commit/92f04f3e505cadac399838c2b7c97af162a7548d))
+
 ## [1.3.1](https://github.com/LunaticMuch/docusaurus-terminology/compare/v1.3.0...v1.3.1) (2024-02-19)
 
 
