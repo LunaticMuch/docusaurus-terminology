@@ -1,5 +1,9 @@
 # Docusaurus Terminology
 
+> [!WARNING]
+> This package is now diverging from the original package.
+> The core of the package is ESM only and tested with Docusaurus v3
+
 **docusaurus-terminology** is a node package for creating a
 terminology structure in your [Docusaurus](https://docusaurus.io/)
 project. This plugin allows you to use terms in your pages that
@@ -23,7 +27,7 @@ in two ways:
 
 ## Compatibility
 
-The plugin has been tested with Docusaurus 2.0 and above. 
+The plugin has been tested with Docusaurus v3.0 and above. 
 The same default environment used by docusaurus satisfies the plugin requirements.
 
 ## Installation
