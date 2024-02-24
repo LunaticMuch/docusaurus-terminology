@@ -1,3 +1,10 @@
+# [1.4.0-beta.3](https://github.com/LunaticMuch/docusaurus-terminology/compare/v1.4.0-beta.2...v1.4.0-beta.3) (2024-02-24)
+
+
+### Features
+
+* strongly typed ([69207da](https://github.com/LunaticMuch/docusaurus-terminology/commit/69207dae784dbb598f49afb9da29ffbc83ca1ba8))
+
 # [1.4.0-beta.2](https://github.com/LunaticMuch/docusaurus-terminology/compare/v1.4.0-beta.1...v1.4.0-beta.2) (2024-02-23)
 
 
