@@ -29,11 +29,13 @@
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.15.10",
+    "@types/git-diff": "^2.0.7",
     "git-diff": "^2.0.6",
     "globby": "^14.0.1",
     "parse-md": "^3.0.3"
   },
   "devDependencies": {
+    "@docusaurus/types": "^3.1.1",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@types/node": "^20.11.19",

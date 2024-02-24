@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'path';
 import { parser } from './parser.js';
+import type { IOptions } from '../types.js';
 
 import {
   getFiles,
@@ -13,13 +14,10 @@ import {
   getOrCreateGlossaryFile
 } from '../lib.js';
 
-export async function glossary(options) {
+export async function glossary(options: IOptions) {
   options.dryRun && console.log('\n* Dry run enabled *\n');
 
   let glossaryContent = '';
-  if (options.glossaryPatternSeparator) {
-    options.patternSeparator = options.glossaryPatternSeparator;
-  }
 
   // Load the term files
   let termsFiles = [];

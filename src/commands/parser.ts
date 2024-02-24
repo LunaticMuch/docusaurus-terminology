@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'path';
-import { gitDiff } from 'git-diff';
+import gitDiff from 'git-diff';
+import type { IOptions } from '../types.js';
 
 import {
   getFiles,
@@ -11,7 +12,7 @@ import {
   addJSImportStatement
 } from '../lib.js';
 
-export async function parser(options) {
+export async function parser(options: IOptions) {
   options.dryRun && console.log('\n* Dry run enabled *\n');
 
   // Load the term files

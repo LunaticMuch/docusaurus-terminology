@@ -2,6 +2,7 @@ import path from 'path';
 import fs from 'node:fs';
 import parseMD from 'parse-md';
 import { globby } from 'globby';
+import type { IOptions, ITerm } from './types.js';
 
 const glossaryHeader = `---
 id: glossary
@@ -28,12 +29,16 @@ declare global {
 }
 
 Array.prototype.diff = function (a) {
-  return this.filter(function (i) {
+  return this.filter(function (i: unknown) {
     return a.indexOf(i) < 0;
   });
 };
 
-export async function getFiles(basePath, noParseFiles, noThrow = false) {
+export async function getFiles(
+  basePath: string,
+  noParseFiles: string[],
+  noThrow = false
+) {
   // fixes paths on Windows environments, globby requires forward slashes
   const fixedPath = basePath.replaceAll('\\', '/');
 
@@ -41,7 +46,7 @@ export async function getFiles(basePath, noParseFiles, noThrow = false) {
   // in case there is a call to this
   // function that does not want to
   // handle the error thrown
-  let files = [];
+  let files: any[] = [];
   // get all files under dir
   try {
     // get all md files from basePath
@@ -57,7 +62,7 @@ export async function getFiles(basePath, noParseFiles, noThrow = false) {
   return files.diff(noParseFiles);
 }
 
-export async function preloadTerms(termsFiles) {
+export async function preloadTerms(termsFiles: any[]) {
   const terms = [];
   for (const term of termsFiles) {
     let fileContent = '';
@@ -97,60 +102,69 @@ export async function preloadTerms(termsFiles) {
   return terms;
 }
 
-export function getCleanTokens(match, separator) {
+export function getCleanTokens(match: string, separator: string) {
   const tokens = match.split(separator);
   // remove file extension, if present
   tokens[1] = tokens[1].replace(/\.[^/.]+$/, '');
-  tokens.forEach((token, index) => {
+  tokens.forEach((token: string, index: number) => {
     tokens[index] = token.replace(/[%]/g, '');
   });
   return tokens;
 }
 
-export function getHeaders(content) {
+export function getHeaders(content: string): string {
   const index = content.indexOf('---', 1) + '---'.length;
   // slice the headers of the file
   return content.slice(0, index);
 }
 
-export function addJSImportStatement(content) {
+export function addJSImportStatement(content: string) {
   const importStatement =
     `\n\nimport Term ` +
     `from "@lunaticmuch/docusaurus-terminology/components/tooltip.js";\n`;
   return importStatement + content;
 }
 
-export function sortFiles(files) {
-  files.sort((a, b) =>
-    a.title.toLowerCase() > b.title.toLowerCase()
-      ? 1
-      : b.title.toLowerCase() > a.title.toLowerCase()
-        ? -1
-        : 0
+export function sortFiles(files: any[]) {
+  files.sort(
+    (
+      a: { title: { toLowerCase: () => number } },
+      b: { title: { toLowerCase: () => number } }
+    ) =>
+      a.title.toLowerCase() > b.title.toLowerCase()
+        ? 1
+        : b.title.toLowerCase() > a.title.toLowerCase()
+          ? -1
+          : 0
   );
 }
 
-export function cleanGlossaryTerms(terms) {
-  const cleanTerms = terms.filter((item) => {
-    return item.title && item.title.length > 0
-      ? true
-      : console.log(
-          `! The file ${item.filepath} lacks the attribute "title" and so is ` +
-            `excluded from the glossary.`
-        );
-  });
+export function cleanGlossaryTerms(terms: any[]) {
+  const cleanTerms = terms.filter(
+    (item: { title: string | any[]; filepath: any }) => {
+      return item.title && item.title.length > 0
+        ? true
+        : console.log(
+            `! The file ${item.filepath} lacks the attribute "title" and so is ` +
+              `excluded from the glossary.`
+          );
+    }
+  );
   // handle debug case here
   return cleanTerms;
 }
 
-export function filterTypeTerms(terms, glossaryTermPatterns) {
+export function filterTypeTerms(
+  terms: any[],
+  glossaryTermPatterns: string | any[]
+) {
   if (glossaryTermPatterns.length == 0) {
     console.log(
       '! No glossaryTermPatterns were specified to filter ' + 'terms by type.'
     );
     return terms;
   }
-  const typeTerms = terms.filter((item) => {
+  const typeTerms = terms.filter((item: { type: any; id: any }) => {
     return glossaryTermPatterns.indexOf(item.type) > -1
       ? true
       : console.log(
@@ -161,7 +175,7 @@ export function filterTypeTerms(terms, glossaryTermPatterns) {
   return typeTerms;
 }
 
-export function getGlossaryTerm(term, path) {
+export function getGlossaryTerm(term: ITerm, path: string) {
   let hover = term.glossaryText != undefined ? term.glossaryText : '';
   if (hover.length <= 0) {
     hover = term.hoverText != undefined ? term.hoverText : '';
@@ -171,7 +185,7 @@ export function getGlossaryTerm(term, path) {
     : `\n\n### [${term.title}](${path})`;
 }
 
-export function getOrCreateGlossaryFile(path) {
+export function getOrCreateGlossaryFile(path: string) {
   let fileContent = '';
   // TODO: Replace with async fs function
   if (!fs.existsSync(path)) {
@@ -183,7 +197,7 @@ export function getOrCreateGlossaryFile(path) {
     // fs.writeFileSync(path, fileContent, "utf8",
     //   (error: any) => { if (error) throw error; });
     try {
-      const content = fs.writeFileSync(path, fileContent, 'utf8');
+      fs.writeFileSync(path, fileContent, 'utf8');
     } catch (err) {
       console.log(err);
     }
@@ -200,15 +214,15 @@ export function getOrCreateGlossaryFile(path) {
   return fileContent;
 }
 
-export function getRelativePath(_, target, opts) {
+export function getRelativePath(_: string, target: string, opts: IOptions) {
   // calculate relative path from each file's parent dir
-  const targetDir = target.substr(0, target.lastIndexOf('/'));
+  const targetDir = target.substring(0, target.lastIndexOf('/'));
   //const relative_url = path.relative(sourceDir, targetDir);
   const relative_url = path.relative(opts.termsDir, targetDir);
   const final_url = path.join(
     opts.termsUrl,
     relative_url,
-    target.substr(target.lastIndexOf('/'))
+    target.substring(target.lastIndexOf('/'))
   );
   // construct the final url by appending the target's filename
   // if the relative url is empty, it means that the referenced
