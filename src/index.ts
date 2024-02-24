@@ -3,20 +3,10 @@ import path from 'path';
 import { parser } from './commands/parser.js';
 import { glossary } from './commands/glossary.js';
 import { validateOptions } from './validator.js';
+import type { IOptions } from './types.js';
+import type { LoadContext, Plugin } from '@docusaurus/types';
 
-interface IOptions {
-  termsUrl: string;
-  termsDir: string;
-  docsDir: string;
-  glossaryFilepath: string;
-  noParseFiles: string[];
-  noGlossaryFiles: string[];
-  glossaryTermPatterns: string[];
-  dryRun: boolean;
-  debug: boolean;
-}
-
-const DEFAULT_OPTIONS = {
+const DEFAULT_OPTIONS: IOptions = {
   docsDir: './docs/',
   termsDir: './docs/terms/',
   termsUrl: '/docs/terms',
@@ -29,7 +19,7 @@ const DEFAULT_OPTIONS = {
   debug: false
 };
 
-module.exports = function (context, opts) {
+module.exports = function (context: LoadContext, opts: IOptions): Plugin {
   !opts.termsDir &&
     console.log(
       `\n! No option for terms directory found, ` +
@@ -56,7 +46,7 @@ module.exports = function (context, opts) {
         .option('--dry-run', 'see what the command will do')
         .option('--debug', 'see all log output of the command')
         .description('Parse all md files to replace terms')
-        .action((args) => {
+        .action((args: { dryRun: boolean; debug: boolean }) => {
           // check for dry-run and debug
           options.dryRun = args.dryRun ? true : false;
           options.debug = args.debug ? true : false;
@@ -69,7 +59,7 @@ module.exports = function (context, opts) {
         .option('--dry-run', 'see what the command will do')
         .option('--debug', 'see all log output of the command')
         .description('Generate a glossary of terms')
-        .action((args) => {
+        .action((args: { dryRun: boolean; debug: boolean }) => {
           // check for dry-run and debug
           options.dryRun = args.dryRun ? true : false;
           options.debug = args.debug ? true : false;
