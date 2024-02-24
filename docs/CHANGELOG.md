@@ -1,3 +1,11 @@
+# [1.4.0-beta.4](https://github.com/LunaticMuch/docusaurus-terminology/compare/v1.4.0-beta.3...v1.4.0-beta.4) (2024-02-24)
+
+
+### Bug Fixes
+
+* package step ([2ad4cc2](https://github.com/LunaticMuch/docusaurus-terminology/commit/2ad4cc2de72e6caa392508018b84e5045c8ebf8d))
+* release model ([71c4667](https://github.com/LunaticMuch/docusaurus-terminology/commit/71c466716f2b0b0d0df6ac788f9bc17b7a45e9c5))
+
 # [1.4.0-beta.3](https://github.com/LunaticMuch/docusaurus-terminology/compare/v1.4.0-beta.2...v1.4.0-beta.3) (2024-02-24)
 
 
