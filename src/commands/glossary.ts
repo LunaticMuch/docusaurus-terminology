@@ -95,4 +95,3 @@ export async function glossary(options: IOptions) {
   console.log(`\u2713 ${termsByType.length} terms found.`);
 }
 
-module.exports = glossary;
