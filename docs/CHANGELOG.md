@@ -1,3 +1,16 @@
+# [1.5.0](https://github.com/LunaticMuch/docusaurus-terminology/compare/v1.4.0...v1.5.0) (2025-02-02)
+
+
+### Bug Fixes
+
+* audit signatures ([e89011e](https://github.com/LunaticMuch/docusaurus-terminology/commit/e89011e3e52a4341144afdac6589e7f973d06dc1))
+* vulnerabilities ([2445206](https://github.com/LunaticMuch/docusaurus-terminology/commit/24452061f339dbb9033951fea3979754ed93ff7d))
+
+
+### Features
+
+* patch updates ([0660813](https://github.com/LunaticMuch/docusaurus-terminology/commit/06608136dd40c328e65041e45133b8c0f5f99625))
+
 # [1.4.0](https://github.com/LunaticMuch/docusaurus-terminology/compare/v1.3.1...v1.4.0) (2024-02-24)
 
 
